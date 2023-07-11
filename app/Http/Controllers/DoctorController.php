@@ -15,6 +15,8 @@ class DoctorController extends Controller
     public function index()
     {
         //
+        $doctors = Doctor::all();
+        return response($doctors);
     }
 
     /**
@@ -26,6 +28,19 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         //
+        $doctor = new Doctor;
+        // Set the doctor attributes based on the request data
+        $doctor->name = $request->input('name');
+        $doctor->email = $request->input('email');
+        $doctor->phone = $request->input('phone');
+        $doctor->degree = $request->input('degree');
+        $doctor->experiance = $request->input('experiance');
+        // ... set other attributes as needed
+        
+        // Save the doctor to the database
+        $doctor->save();
+        
+        return response("new request saved");
     }
 
     /**
@@ -37,6 +52,7 @@ class DoctorController extends Controller
     public function show(Doctor $doctor)
     {
         //
+        return response($doctor);
     }
 
     /**
@@ -49,6 +65,17 @@ class DoctorController extends Controller
     public function update(Request $request, Doctor $doctor)
     {
         //
+        $doctor->name = $request->input('name');
+        $doctor->email = $request->input('email');
+        $doctor->phone = $request->input('phone');
+        $doctor->degree = $request->input('degree');
+        $doctor->experiance = $request->input('experiance');
+        // ... update other attributes as needed
+        
+        // Save the updated doctor to the database
+        $doctor->save();
+        
+        return response("doctor updated");
     }
 
     /**
@@ -60,5 +87,8 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
+        $doctor->delete();
+        
+        return response("doctor record deleted");
     }
 }
