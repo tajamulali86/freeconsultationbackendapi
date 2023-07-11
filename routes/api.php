@@ -21,5 +21,5 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('patient', PatientController::class);
+Route::apiResource('patients', PatientController::class);
 Route::apiResource('doctors', DoctorController::class);
