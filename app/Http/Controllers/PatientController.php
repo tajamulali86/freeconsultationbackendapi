@@ -73,7 +73,6 @@ class PatientController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
      *
      * @param  \App\Models\Patient  $patient
      * @return \Illuminate\Http\Response
