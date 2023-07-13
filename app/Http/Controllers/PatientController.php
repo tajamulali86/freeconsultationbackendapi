@@ -33,14 +33,20 @@ class PatientController extends Controller
         // Set the patient attributes based on the request data
         $patient->name = $request->input('name');
         $patient->email = $request->input('email');
+        // if($request->hasFIle("PatientFile")){
+        //     $filename="";
+        //     $filename=$request->getSchemeAndHttpHost().'/assets/patient/file'.time().'.'.$request->img->ge();
+    
+        //     $request->img->move(public_path('/assets/patient/file'), $filename);
+        //     $patient->file_path=$filename;}
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->store('files'); // Adjust the storage path as needed
+            $path = $file->store('patients/file', 'public');
             $patient->file_path = $path; // Save the file path to the patient model
         }
-        if ($request->hasFile('profileimg')) {
-            $file = $request->file('profileimg');
-            $path = $file->store('profileimg'); // Adjust the storage path as needed
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $path = $file->store('patients/image', 'public');
             $patient->profileimg = $path; // Save the file path to the patient model
         }
 
@@ -76,14 +82,27 @@ class PatientController extends Controller
         //
         $patient->name = $request->input('name');
         $patient->email = $request->input('email');
+        // $filename = "";
+
+        // if($request->hasFIle("PatientFile")){
+        // $filename=$request->getSchemeAndHttpHost().'/assets/patient/file'.time().'.'.$request->img->extension();
+
+        // $request->img->move(public_path('/assets/patient/file'), $filename);
+        // $patient->file_path=$filename;}
+
+        // $patients=Patient::create([
+        // 'img'=>$filename,
+        // 'name'=>$request->name,....
+        // ]);
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->store('files'); // Adjust the storage path as needed
+            $path = $file->store('patients/file', 'public');
             $patient->file_path = $path; // Save the file path to the patient model
         }
-        if ($request->hasFile('profileimg')) {
-            $file = $request->file('profileimg');
-            $path1= $file->store('profileimg'); // Adjust the storage path as needed
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $path = $file->store('patients/image', 'public');
             $patient->profileimg = $path; // Save the file path to the patient model
         }
         // Save the patient to the database
@@ -92,7 +111,6 @@ class PatientController extends Controller
         // ... update other attributes as needed
         
         // Save the updated patient to the database
-        $patient->save();
         
         return response("patient updated");
     }

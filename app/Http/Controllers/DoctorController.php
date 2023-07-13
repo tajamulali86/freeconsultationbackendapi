@@ -37,7 +37,8 @@ class DoctorController extends Controller
         $doctor->experiance = $request->input('experiance');
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->store('doctor'); // Adjust the storage path as needed
+            $path = $file->store('doctor/file', 'public');
+
             $doctor->file_path = $path; // Save the file path to the patient model
         }
         // ... set other attributes as needed
@@ -77,7 +78,7 @@ class DoctorController extends Controller
         $doctor->experiance = $request->input('experiance');
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->store('doctor'); // Adjust the storage path as needed
+            $path = $file->store('doctor/file', 'public');
             $doctor->file_path = $path; // Save the file path to the patient model
         }
         // ... update other attributes as needed
