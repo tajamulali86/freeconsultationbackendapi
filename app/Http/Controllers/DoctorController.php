@@ -35,6 +35,11 @@ class DoctorController extends Controller
         $doctor->phone = $request->input('phone');
         $doctor->degree = $request->input('degree');
         $doctor->experiance = $request->input('experiance');
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('doctor'); // Adjust the storage path as needed
+            $doctor->file_path = $path; // Save the file path to the patient model
+        }
         // ... set other attributes as needed
         
         // Save the doctor to the database
@@ -70,6 +75,11 @@ class DoctorController extends Controller
         $doctor->phone = $request->input('phone');
         $doctor->degree = $request->input('degree');
         $doctor->experiance = $request->input('experiance');
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('doctor'); // Adjust the storage path as needed
+            $doctor->file_path = $path; // Save the file path to the patient model
+        }
         // ... update other attributes as needed
         
         // Save the updated doctor to the database

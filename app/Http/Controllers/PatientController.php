@@ -28,10 +28,22 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         //.
+        
         $patient = new Patient;
         // Set the patient attributes based on the request data
         $patient->name = $request->input('name');
         $patient->email = $request->input('email');
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('files'); // Adjust the storage path as needed
+            $patient->file_path = $path; // Save the file path to the patient model
+        }
+        if ($request->hasFile('profileimg')) {
+            $file = $request->file('profileimg');
+            $path = $file->store('profileimg'); // Adjust the storage path as needed
+            $patient->profileimg = $path; // Save the file path to the patient model
+        }
+
         // ... set other attributes as needed
         
         // Save the patient to the database
@@ -64,6 +76,19 @@ class PatientController extends Controller
         //
         $patient->name = $request->input('name');
         $patient->email = $request->input('email');
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('files'); // Adjust the storage path as needed
+            $patient->file_path = $path; // Save the file path to the patient model
+        }
+        if ($request->hasFile('profileimg')) {
+            $file = $request->file('profileimg');
+            $path1= $file->store('profileimg'); // Adjust the storage path as needed
+            $patient->profileimg = $path; // Save the file path to the patient model
+        }
+        // Save the patient to the database
+        $patient->save();
+
         // ... update other attributes as needed
         
         // Save the updated patient to the database
