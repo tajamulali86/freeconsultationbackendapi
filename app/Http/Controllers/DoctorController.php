@@ -41,6 +41,11 @@ class DoctorController extends Controller
 
             $doctor->file_path = $path; // Save the file path to the patient model
         }
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $path = $file->store('doctor/image', 'public');
+            $doctor->profileimg = $path; // Save the file path to the patient model
+        }
         // ... set other attributes as needed
         
         // Save the doctor to the database
@@ -80,6 +85,11 @@ class DoctorController extends Controller
             $file = $request->file('file');
             $path = $file->store('doctor/file', 'public');
             $doctor->file_path = $path; // Save the file path to the patient model
+        }
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $path = $file->store('doctor/image', 'public');
+            $doctor->profileimg = $path; // Save the file path to the patient model
         }
         // ... update other attributes as needed
         
